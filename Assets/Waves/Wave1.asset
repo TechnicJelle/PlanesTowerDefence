@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Wave1
   m_EditorClassIdentifier: 
   delaySincePreviousWave: 5
-  enemyCount: 10
-  enemyPrefab: {fileID: 7604507418203960949, guid: 053d7b4d1c92cb55fbaa00723ac91f96, type: 3}
+  waveParts:
+  - enemyPrefab: {fileID: 7604507418203960949, guid: 053d7b4d1c92cb55fbaa00723ac91f96, type: 3}
+    enemyCount: 5
+  - enemyPrefab: {fileID: 7604507418203960949, guid: 30ae18823bb4995d08a078ab8895c2ee, type: 3}
+    enemyCount: 1

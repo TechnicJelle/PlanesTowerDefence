@@ -1,21 +1,30 @@
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ScriptableObjects
 {
 	[CreateAssetMenu(fileName = "Wave", menuName = "ScriptableObjects/Wave")]
 	public class Wave : ScriptableObject
 	{
-		[FormerlySerializedAs("spawnSeconds")] public int delaySincePreviousWave;
-		[SerializeField] private int enemyCount;
-		[SerializeField] private GameObject enemyPrefab;
+		[SerializeField] public int delaySincePreviousWave;
+		[SerializeField] private WavePart[] waveParts;
 
 		public void StartWave()
 		{
-			for (int i = 0; i < enemyCount; i++)
+			foreach (WavePart wavePart in waveParts)
 			{
-				Instantiate(enemyPrefab);
+				for (int i = 0; i < wavePart.enemyCount; i++)
+				{
+					Instantiate(wavePart.enemyPrefab);
+				}
 			}
 		}
+	}
+
+	[Serializable]
+	public class WavePart
+	{
+		[SerializeField] public GameObject enemyPrefab;
+		[SerializeField] public int enemyCount;
 	}
 }
