@@ -16,9 +16,10 @@ public class Enemy : MonoBehaviour
 		if(_currentNode.nextNodes == null) Debug.LogError("Current node has no next nodes");
 		if(_currentNode.nextNodes.Count == 0) Debug.LogError("No next nodes for node " + _currentNode.name);
 
-		//choose next node with least amountOfTimesVisited
+		//choose next node as a random neighbour to start off with...
 		RouteNode nextNode = _currentNode.nextNodes[Random.Range(0, _currentNode.nextNodes.Count)];
 
+		//...then choose actual next node with least amountOfTimesVisited
 		foreach (RouteNode node in _currentNode.nextNodes)
 			if (node.amountOfTimesVisited < nextNode.amountOfTimesVisited)
 				nextNode = node;
