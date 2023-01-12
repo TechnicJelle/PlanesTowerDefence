@@ -352,8 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4803f6e21843184d7b90f9f13f9183f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextNodes:
-  - {fileID: 1997871554}
+  nextNodes: []
   amountOfTimesVisited: 0
 --- !u!1 &519420028
 GameObject:
@@ -654,7 +653,7 @@ GameObject:
   - component: {fileID: 646467242}
   - component: {fileID: 646467243}
   m_Layer: 0
-  m_Name: WaveSpawner
+  m_Name: WaveManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,6 +689,9 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 7e70bb4c7034cdb68b15690f46bf3201, type: 2}
   - {fileID: 11400000, guid: 0da9c78ab466b1463823558e969acb0e, type: 2}
+  - {fileID: 11400000, guid: 6008f4f0fd8d2340abc1f36fa41fbff4, type: 2}
+  - {fileID: 11400000, guid: 466cff3d5d7048126a9ce82dbd3649cd, type: 2}
+  - {fileID: 11400000, guid: 52f3212003c0a218295c3fda544fe5b9, type: 2}
   waveText: {fileID: 2100697401}
   waveCountdownText: {fileID: 1024075884}
 --- !u!1 &682681804

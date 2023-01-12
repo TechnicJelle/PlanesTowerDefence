@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a9efbb0557a4766ab9f6e8558fca2cb, type: 3}
-  m_Name: Wave2
+  m_Name: Wave4
   m_EditorClassIdentifier: 
-  delaySincePreviousWave: 10
+  delaySincePreviousWave: 13
   waveParts:
   - enemyPrefab: {fileID: 7604507418203960949, guid: 053d7b4d1c92cb55fbaa00723ac91f96, type: 3}
     enemyCount: 2

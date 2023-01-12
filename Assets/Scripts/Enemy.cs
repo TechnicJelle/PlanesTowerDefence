@@ -1,8 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
+
+using static DebugPrinter;
 
 public class Enemy : MonoBehaviour
 {
 	public float speed = 5f;
+
+	public float startHealth = 100f;
 
 	private static RouteNode _beginNode;
 	private static RouteNode _endNode;
@@ -10,11 +15,14 @@ public class Enemy : MonoBehaviour
 	private RouteNode _currentNode;
 	private RouteNode _nextNode;
 
+	private Slider _healthBar;
+	private float _health;
+
 	private RouteNode ChooseNextNode()
 	{
-		if(_currentNode == null) Debug.LogError("Current node is null");
-		if(_currentNode.nextNodes == null) Debug.LogError("Current node has no next nodes");
-		if(_currentNode.nextNodes.Count == 0) Debug.LogError("No next nodes for node " + _currentNode.name);
+		if(_currentNode == null) DPrint("Current node is null");
+		if(_currentNode.nextNodes == null) DPrint("Current node has no next nodes");
+		if(_currentNode.nextNodes.Count == 0) DPrint("No next nodes for node " + _currentNode.name);
 
 		//choose next node as a random neighbour to start off with...
 		RouteNode nextNode = _currentNode.nextNodes[Random.Range(0, _currentNode.nextNodes.Count)];
@@ -30,6 +38,9 @@ public class Enemy : MonoBehaviour
 
 	private void Start()
 	{
+		//vary speed just a tiny tad, to prevent enemies from clumping up
+		speed += Random.Range(-0.1f, 0.1f);
+
 		if (_beginNode == null)
 		{
 			_beginNode = GameObject.Find("Start").GetComponent<RouteNode>();
@@ -44,6 +55,12 @@ public class Enemy : MonoBehaviour
 		transform.position = _beginNode.transform.position;
 		_currentNode = _beginNode;
 		_nextNode = ChooseNextNode();
+
+		_healthBar = GetComponentInChildren<Slider>();
+		if(_healthBar == null) Debug.LogError("Health bar not found");
+		_healthBar.maxValue = startHealth;
+		_health = startHealth;
+		_healthBar.value = _health;
 	}
 
 	private void Update()
@@ -52,7 +69,23 @@ public class Enemy : MonoBehaviour
 		if (transform.position == _nextNode.transform.position)
 		{
 			_currentNode = _nextNode;
+			if(_currentNode == _endNode)
+			{
+				DPrint("Enemy reached end node");
+				Destroy(gameObject);
+				return;
+			}
 			_nextNode = ChooseNextNode();
 		}
+
+		_healthBar.value = _health;
+	}
+
+	private void Damage(float amount)
+	{
+		_health -= amount;
+		if (_health > 0f) return;
+		DPrint("Enemy died");
+		Destroy(gameObject);
 	}
 }

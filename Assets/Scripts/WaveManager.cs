@@ -3,7 +3,7 @@ using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 
-public class WaveSpawner : MonoBehaviour
+public class WaveManager : MonoBehaviour
 {
 	[SerializeField] private Wave[] waves;
 
@@ -17,10 +17,11 @@ public class WaveSpawner : MonoBehaviour
 
 	private IEnumerator SpawnWaves()
 	{
+		waveText.text = "Prepare to be attacked!";
 		for (int waveNr = 0; waveNr < waves.Length; waveNr++)
 		{
 			Wave wave = waves[waveNr];
-			waveText.text = "Current wave: " + waveNr;
+			if(waveNr > 0) waveText.text = "Current wave: " + waveNr;
 			for (int i = 0; i < wave.delaySincePreviousWave + 1; i++)
 			{
 				waveCountdownText.text = $"Time till next wave: {wave.delaySincePreviousWave - i}";
@@ -31,7 +32,7 @@ public class WaveSpawner : MonoBehaviour
 		}
 
 		//All waves have spawned, so clear the text
-		waveText.text = "No waves left";
+		// waveText.text = "No waves left";
 		waveCountdownText.text = "";
 	}
 }
