@@ -31,25 +31,6 @@ public class Enemy : MonoBehaviour
 	private float _turretRotationSpeed;
 	private float _turretOffset;
 
-
-	private RouteNode ChooseNextNode()
-	{
-		// if(_currentNode == null) DPrint("Current node is null");
-		// if(_currentNode.nextNodes == null) DPrint("Current node has no next nodes");
-		// if(_currentNode.nextNodes.Count == 0) DPrint("No next nodes for node " + _currentNode.name);
-
-		//choose next node as a random neighbour to start off with...
-		RouteNode nextNode = _currentNode.nextNodes[Random.Range(0, _currentNode.nextNodes.Count)];
-
-		//...then choose actual next node with least amountOfTimesVisited
-		foreach (RouteNode node in _currentNode.nextNodes)
-			if (node.amountOfTimesVisited < nextNode.amountOfTimesVisited)
-				nextNode = node;
-
-		nextNode.amountOfTimesVisited++;
-		return nextNode;
-	}
-
 	private void Start()
 	{
 		//==Route==
@@ -121,6 +102,24 @@ public class Enemy : MonoBehaviour
 		_turret.rotation = Quaternion.Lerp(_turret.rotation,
 			Quaternion.Euler(0, 0, angle + 90f + Mathf.Sin(_turretRotationSpeed * (Time.time + _turretOffset)) * turretRotationAmount), //target rotation
 			turretCornerTurnSpeed);
+	}
+
+	private RouteNode ChooseNextNode()
+	{
+		// if(_currentNode == null) DPrint("Current node is null");
+		// if(_currentNode.nextNodes == null) DPrint("Current node has no next nodes");
+		// if(_currentNode.nextNodes.Count == 0) DPrint("No next nodes for node " + _currentNode.name);
+
+		//choose next node as a random neighbour to start off with...
+		RouteNode nextNode = _currentNode.nextNodes[Random.Range(0, _currentNode.nextNodes.Count)];
+
+		//...then choose actual next node with least amountOfTimesVisited
+		foreach (RouteNode node in _currentNode.nextNodes)
+			if (node.amountOfTimesVisited < nextNode.amountOfTimesVisited)
+				nextNode = node;
+
+		nextNode.amountOfTimesVisited++;
+		return nextNode;
 	}
 
 	private void Damage(float amount)
