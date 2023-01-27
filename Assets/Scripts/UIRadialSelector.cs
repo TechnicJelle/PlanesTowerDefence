@@ -72,7 +72,6 @@ public class UIRadialSelector : MonoBehaviour
 
 	private void OnChoiceClicked(Choice choice)
 	{
-		DebugPrinter.DPrint("Choice clicked: " + choice.label);
 		TowerContainer.tower = Instantiate(choice.gameObject, TowerContainer.transform);
 		Hide();
 	}

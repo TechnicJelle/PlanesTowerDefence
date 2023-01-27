@@ -27,7 +27,6 @@ public class TowerContainer : MonoBehaviour
 
 	private void OnMouseUp()
 	{
-		DebugPrinter.DPrint("Clicked on tower container" + name);
 		if (tower == null)
 		{
 			if (_buyMenuOpen)

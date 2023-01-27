@@ -110,7 +110,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.16470589}
   m_FlipX: 0
@@ -150,13 +150,9 @@ MonoBehaviour:
   choices:
   - gameObject: {fileID: 6043823260481442724, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
     label: Single Target
-    price: 100
   - gameObject: {fileID: 3819542819496024288, guid: 9d2e062e44cbab178b732cbac3c2091e, type: 3}
     label: Rapid Fire
-    price: 150
   - gameObject: {fileID: 8796967951191738759, guid: 578df21450d5739b2b8a99213b247456, type: 3}
     label: AOE
-    price: 200
   - gameObject: {fileID: 4778981237982223212, guid: b6b3cb5237d777f34a3a205f5043c8c0, type: 3}
     label: Debuff
-    price: 150

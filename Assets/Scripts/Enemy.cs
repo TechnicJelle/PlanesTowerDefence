@@ -122,6 +122,14 @@ public class Enemy : MonoBehaviour
 		return nextNode;
 	}
 
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		Bullet bullet = col.gameObject.GetComponent<Bullet>();
+		if (bullet == null) return;
+		Damage(bullet.damage);
+		Destroy(bullet.gameObject);
+	}
+
 	private void Damage(float amount)
 	{
 		_health -= amount;

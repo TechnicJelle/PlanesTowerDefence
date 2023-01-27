@@ -8,9 +8,20 @@ public class Tower : MonoBehaviour
 	[SerializeField] private float fireRate = 1f;
 	[SerializeField] private GameObject bulletPrefab;
 
+	private Enemy _target;
+
 	private void Start()
 	{
 		if(bulletPrefab == null) Debug.LogError("No bullet prefab set!");
+
+		InvokeRepeating(nameof(Fire), 0f, fireRate);
+	}
+
+	private void Fire()
+	{
+		if(_target == null) return;
+		Transform myTransform = transform;
+		Instantiate(bulletPrefab, myTransform.position, myTransform.rotation);
 	}
 
 	private void Update()
@@ -18,10 +29,12 @@ public class Tower : MonoBehaviour
 		Transform myTransform = transform;
 
 		// Find closest enemy
+		_target = null;
 		Enemy target = GetClosestEnemy();
 		if(target == null) return;
 		Vector3 targetPosition = target.transform.position;
 		if(Vector3.Distance(myTransform.position, targetPosition) > range) return;
+		_target = target;
 
 		// Rotate towards enemy
 		myTransform.up = targetPosition - myTransform.position;
