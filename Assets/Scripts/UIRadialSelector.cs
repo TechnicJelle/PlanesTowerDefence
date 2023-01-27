@@ -45,9 +45,18 @@ public class UIRadialSelector : MonoBehaviour
 			float angle = 2f * PI / choices.Length * i - PI - PI / choices.Length;
 			instance.transform.localPosition = new Vector3(Cos(angle), Sin(angle), 0);
 
-			// Set button text
-			TextMeshProUGUI tmpText = instance.GetComponentInChildren<TextMeshProUGUI>();
-			tmpText.text = choice.label;
+			// Set button texts
+			TextMeshProUGUI[] texts = instance.GetComponentsInChildren<TextMeshProUGUI>();
+
+			foreach (TextMeshProUGUI text in texts)
+			{
+				text.text = text.name switch
+				{
+					{ } a when a.IndexOf("Name", StringComparison.OrdinalIgnoreCase) >= 0 => choice.label,
+					{ } a when a.IndexOf("Price", StringComparison.OrdinalIgnoreCase) >= 0 => choice.gameObject.GetComponent<Tower>().price.ToString(),
+					_ => text.text,
+				};
+			}
 
 			// Set button image
 			Image image = instance.GetComponent<Image>();
@@ -84,5 +93,4 @@ internal class Choice
 {
 	public GameObject gameObject;
 	public string label;
-	public int price;
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+	[SerializeField] public int price = 100;
 	[Range(1, 6)] [SerializeField] private float range = 15f;
 	[SerializeField] private float fireRate = 1f;
 	[SerializeField] private GameObject bulletPrefab;
