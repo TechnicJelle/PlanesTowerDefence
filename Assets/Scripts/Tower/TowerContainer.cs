@@ -22,9 +22,15 @@ namespace Tower
 			OnMouseExit();
 		}
 
+		private void Start()
+		{
+			WaveManager.Instance.OnWaveStart += _choiceSelector.Hide;
+		}
+
 		private void OnMouseEnter()
 		{
 			if (!GameStateManager.Instance.IsRunning) return;
+			if (WaveManager.Instance.IsWaveRunning) return;
 			Color color = _spriteRenderer.color;
 			color.a = 1f;
 			_spriteRenderer.color = color;
@@ -33,6 +39,7 @@ namespace Tower
 		private void OnMouseUp()
 		{
 			if (!GameStateManager.Instance.IsRunning) return;
+			if (WaveManager.Instance.IsWaveRunning) return;
 			if (tower == null)
 			{
 				if (_buyMenuOpen)

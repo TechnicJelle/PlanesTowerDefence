@@ -17,7 +17,7 @@ namespace UI
 
 		private Canvas _canvas;
 
-		private void Start()
+		private void Awake()
 		{
 			if (_canvasPrefab == null)
 			{
