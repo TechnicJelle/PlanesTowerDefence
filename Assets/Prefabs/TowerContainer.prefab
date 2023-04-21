@@ -150,9 +150,9 @@ MonoBehaviour:
   choices:
   - gameObject: {fileID: 6043823260481442724, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
     label: Single Target
-  - gameObject: {fileID: 3819542819496024288, guid: 9d2e062e44cbab178b732cbac3c2091e, type: 3}
+  - gameObject: {fileID: 787973606111994841, guid: 8eb5a65204b95f60599306a87f5d6796, type: 3}
     label: Rapid Fire
-  - gameObject: {fileID: 8796967951191738759, guid: 578df21450d5739b2b8a99213b247456, type: 3}
+  - gameObject: {fileID: 8870980065430779132, guid: b324dc8f70ff6fbf4a32fdcd1106aaa7, type: 3}
     label: AOE
-  - gameObject: {fileID: 4778981237982223212, guid: b6b3cb5237d777f34a3a205f5043c8c0, type: 3}
+  - gameObject: {fileID: 7212851639105411181, guid: 74522931d3afa0b82828b1720123e794, type: 3}
     label: Debuff

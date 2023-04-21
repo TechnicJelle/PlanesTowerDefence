@@ -7,7 +7,7 @@ namespace Towers
 	public class Tower : MonoBehaviour
 	{
 		[SerializeField] public int price = 100;
-		[Range(1, 6)] [SerializeField] private float range = 15f;
+		[Range(1, 10)] [SerializeField] private float range = 3f;
 		[SerializeField] private float fireRate = 1f;
 		[SerializeField] private GameObject bulletPrefab;
 
@@ -17,7 +17,7 @@ namespace Towers
 		{
 			if(bulletPrefab == null) Debug.LogError("No bullet prefab set!");
 
-			InvokeRepeating(nameof(Fire), 0f, fireRate);
+			InvokeRepeating(nameof(Fire), 0f, 1f/fireRate);
 		}
 
 		private void Fire()

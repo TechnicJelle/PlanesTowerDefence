@@ -50,7 +50,7 @@ namespace Managers
 			if (_state != GameState.Pregame) return;
 			Debug.Log("Starting game!");
 			_state = GameState.Running;
-			OnGameStart.Invoke();
+			OnGameStart?.Invoke();
 		}
 
 		public void GameOver()
@@ -58,7 +58,7 @@ namespace Managers
 			if (_state != GameState.Running) return;
 			Debug.Log("Game Over!");
 			_state = GameState.Over;
-			OnGameOver.Invoke();
+			OnGameOver?.Invoke();
 			inGameView.Hide();
 			gameOverView.Show();
 		}
@@ -68,7 +68,7 @@ namespace Managers
 			if (_state != GameState.Over) return;
 			Debug.Log("Restarting game!");
 			_state = GameState.Pregame;
-			OnResetGame.Invoke();
+			OnResetGame?.Invoke();
 		}
 	}
 }

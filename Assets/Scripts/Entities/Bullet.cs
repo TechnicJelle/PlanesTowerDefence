@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Entities
@@ -6,6 +7,8 @@ namespace Entities
 	{
 		[SerializeField] public int damage = 10;
 		[SerializeField] private float speed = 10f;
+
+		public Action<Enemy> OnEnemyHit;
 
 		private void Update()
 		{
@@ -17,6 +20,15 @@ namespace Entities
 			{
 				Destroy(gameObject);
 			}
+		}
+
+		private void OnTriggerEnter2D(Collider2D col)
+		{
+			Enemy enemy = col.gameObject.GetComponent<Enemy>();
+			if (enemy == null) return;
+			OnEnemyHit?.Invoke(enemy);
+			enemy.Damage(damage);
+			Destroy(gameObject);
 		}
 	}
 }

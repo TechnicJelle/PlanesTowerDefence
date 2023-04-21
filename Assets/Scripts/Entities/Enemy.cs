@@ -1,7 +1,9 @@
+using System;
 using Managers;
 using Route;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Entities
 {
@@ -127,16 +129,9 @@ namespace Entities
 			return nextNode;
 		}
 
-		private void OnTriggerEnter2D(Collider2D col)
+		public void Damage(float amount)
 		{
-			Bullet bullet = col.gameObject.GetComponent<Bullet>();
-			if (bullet == null) return;
-			Damage(bullet.damage);
-			Destroy(bullet.gameObject);
-		}
-
-		private void Damage(float amount)
-		{
+			if (amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount));
 			_health -= amount;
 			if (_health > 0f) return;
 			Die();
