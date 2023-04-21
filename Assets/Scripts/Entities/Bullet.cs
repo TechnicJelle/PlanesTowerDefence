@@ -8,6 +8,9 @@ namespace Entities
 		[SerializeField] public int damage = 10;
 		[SerializeField] private float speed = 10f;
 
+		/// <summary>
+		/// Subscribe to this event to add special effects to the bullet
+		/// </summary>
 		public Action<Enemy> OnEnemyHit;
 
 		private void Update()
