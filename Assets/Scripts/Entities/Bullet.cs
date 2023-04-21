@@ -13,6 +13,8 @@ namespace Entities
 		/// </summary>
 		public Action<Enemy> OnEnemyHit;
 
+		private bool _hasAlreadyHitEnemy;
+
 		private void Update()
 		{
 			Transform myTransform = transform;
@@ -27,8 +29,10 @@ namespace Entities
 
 		private void OnTriggerEnter2D(Collider2D col)
 		{
+			if(_hasAlreadyHitEnemy) return;
 			Enemy enemy = col.gameObject.GetComponent<Enemy>();
 			if (enemy == null) return;
+			_hasAlreadyHitEnemy = true;
 			OnEnemyHit?.Invoke(enemy);
 			enemy.Damage(damage);
 			Destroy(gameObject);
