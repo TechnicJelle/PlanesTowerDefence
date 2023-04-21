@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8639080110622893393}
   - component: {fileID: 980670834946521541}
   - component: {fileID: -2871796732678134994}
-  - component: {fileID: -6278371740590322619}
+  - component: {fileID: -5752272152066839298}
   m_Layer: 5
   m_Name: TowerContainer
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 0}
---- !u!114 &-6278371740590322619
+--- !u!114 &-5752272152066839298
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,15 +144,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074963279508707821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db7004dbbd03438fac4a36ba2213a74, type: 3}
+  m_Script: {fileID: 11500000, guid: 4917b54c1cd54a579c38532b36ae3a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choices:
-  - gameObject: {fileID: 6043823260481442724, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
-    label: Single Target
-  - gameObject: {fileID: 787973606111994841, guid: 8eb5a65204b95f60599306a87f5d6796, type: 3}
-    label: Rapid Fire
-  - gameObject: {fileID: 8870980065430779132, guid: b324dc8f70ff6fbf4a32fdcd1106aaa7, type: 3}
-    label: AOE
-  - gameObject: {fileID: 7212851639105411181, guid: 74522931d3afa0b82828b1720123e794, type: 3}
-    label: Debuff
+  towerChoices:
+  - label: Single Target
+    gameObject: {fileID: 6043823260481442724, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
+  - label: Rapid Fire
+    gameObject: {fileID: 787973606111994841, guid: 8eb5a65204b95f60599306a87f5d6796, type: 3}
+  - label: AOE
+    gameObject: {fileID: 8870980065430779132, guid: b324dc8f70ff6fbf4a32fdcd1106aaa7, type: 3}
+  - label: Debuff
+    gameObject: {fileID: 7212851639105411181, guid: 74522931d3afa0b82828b1720123e794, type: 3}

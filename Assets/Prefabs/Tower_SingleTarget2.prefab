@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2937460099417892696
+--- !u!1001 &3701553004537301371
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,12 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6043823260481442724, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: m_Name
-      value: Tower_AOE
+      value: Tower_SingleTarget2
       objectReference: {fileID: 0}
     - target: {fileID: 6043823260481442725, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1383732190, guid: 608052fcec21798c9a31af47b3346d80, type: 3}
+      objectReference: {fileID: 1520100590, guid: 608052fcec21798c9a31af47b3346d80, type: 3}
     - target: {fileID: 6043823260481442726, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -61,21 +61,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
-      propertyPath: price
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
-      propertyPath: range
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
-      propertyPath: fireRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 6511036054688274096, guid: 0fbaa06f68dbdc7b0a07db2eaa05d155, type: 3}
+      objectReference: {fileID: 7443970420111211388, guid: 95eda975000dc2111a1f102e4e97e9b4, type: 3}
+    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
+      propertyPath: upgradeTower
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

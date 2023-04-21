@@ -1,7 +1,6 @@
 using System;
 using Managers;
 using TMPro;
-using Towers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +11,7 @@ namespace UI
 		private static GameObject _canvasPrefab;
 		private static GameObject _buttonPrefab;
 
-		[SerializeField] private Choice[] choices;
-
-		public TowerContainer TowerContainer { get; set; }
+		private IChoice[] _choices;
 
 		private Canvas _canvas;
 		private Button[] _buttons;
@@ -27,29 +24,34 @@ namespace UI
 				if (_canvasPrefab == null) Debug.LogError("Canvas prefab not found");
 			}
 
-			_canvas = Instantiate(_canvasPrefab, TowerContainer.transform).GetComponent<Canvas>();
-			_canvas.worldCamera = Camera.main;
-
 			if (_buttonPrefab == null)
 			{
 				_buttonPrefab = Resources.Load<GameObject>("Choice Button");
 				if (_buttonPrefab == null) Debug.LogError("Choice Button prefab not found");
 			}
 
-			// Create buttons
-			_buttons = new Button[choices.Length];
-			for (int i = 0; i < choices.Length; i++)
-			{
-				Choice choice = choices[i];
-				GameObject buttonInstance = Instantiate(_buttonPrefab, _canvas.transform);
-				buttonInstance.name = "btn_" + choice.label;
+			_canvas = Instantiate(_canvasPrefab, transform).GetComponent<Canvas>();
+			_canvas.worldCamera = Camera.main;
 
-				int price = choice.Tower.price;
+			Hide();
+		}
+
+		protected void Init(IChoice[] choices)
+		{
+			_choices = choices;
+
+			// Create buttons
+			_buttons = new Button[_choices.Length];
+			for (int i = 0; i < _choices.Length; i++)
+			{
+				IChoice choice = _choices[i];
+				GameObject buttonInstance = Instantiate(_buttonPrefab, _canvas.transform);
+				buttonInstance.name = "btn_" + choice.Label;
 
 				buttonInstance.transform.localScale = new Vector3(1f, 1f, 1f);
 
 				// Set button position
-				float angle = 2f * Mathf.PI / choices.Length * i - Mathf.PI - Mathf.PI / choices.Length;
+				float angle = 2f * Mathf.PI / _choices.Length * i - Mathf.PI - Mathf.PI / _choices.Length;
 				buttonInstance.transform.localPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 
 				// Set button texts
@@ -59,15 +61,15 @@ namespace UI
 				{
 					text.text = text.name switch
 					{
-						{ } a when a.IndexOf("Name", StringComparison.OrdinalIgnoreCase) >= 0 => choice.label,
-						{ } a when a.IndexOf("Price", StringComparison.OrdinalIgnoreCase) >= 0 => price.ToString(),
+						{ } a when a.IndexOf("Name", StringComparison.OrdinalIgnoreCase) >= 0 => choice.Label,
+						{ } a when a.IndexOf("Price", StringComparison.OrdinalIgnoreCase) >= 0 => choice.Price == 0 ? "" : choice.Price.ToString(),
 						_ => text.text,
 					};
 				}
 
 				// Set button image
 				Image image = buttonInstance.GetComponent<Image>();
-				image.sprite = choice.gameObject.GetComponent<SpriteRenderer>().sprite;
+				image.sprite = choice.Sprite;
 
 				// Set button click event
 				Button button = buttonInstance.GetComponentInChildren<Button>();
@@ -75,14 +77,11 @@ namespace UI
 
 				_buttons[i] = button;
 			}
-
-			Hide();
 		}
 
-		private void OnChoiceClicked(Choice choice)
+		protected virtual void OnChoiceClicked(IChoice choice)
 		{
-			PlayerStatsManager.Instance.Buy(choice.Tower.price);
-			TowerContainer.tower = Instantiate(choice.gameObject, TowerContainer.transform);
+			PlayerStatsManager.Instance.Buy(choice.Price);
 			Hide();
 		}
 
@@ -93,8 +92,8 @@ namespace UI
 
 		private void Update()
 		{
-			for (int i = 0; i < choices.Length; i++)
-				_buttons[i].interactable = PlayerStatsManager.Instance.HaveEnoughMoneyFor(choices[i].Tower.price);
+			for (int i = 0; i < _choices.Length; i++)
+				_buttons[i].interactable = PlayerStatsManager.Instance.HaveEnoughMoneyFor(_choices[i].Price);
 		}
 
 		public void Hide()
@@ -105,11 +104,10 @@ namespace UI
 		public bool IsOpen => _canvas.enabled;
 	}
 
-	[Serializable]
-	internal class Choice
+	public interface IChoice
 	{
-		public GameObject gameObject;
-		public Tower Tower => gameObject.GetComponent<Tower>();
-		public string label;
+		public string Label => null;
+		public int Price => -1;
+		public Sprite Sprite => null;
 	}
 }

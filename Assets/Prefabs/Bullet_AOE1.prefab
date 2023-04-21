@@ -60,9 +60,21 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 936414320, guid: ea14e162be48a12078c3e02c5ad61fc2, type: 3}
+    - target: {fileID: 3392126803596338204, guid: fec13a154c7f73b5b817659cbb9456b8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392126803596338204, guid: fec13a154c7f73b5b817659cbb9456b8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392126803596338204, guid: fec13a154c7f73b5b817659cbb9456b8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3392126803596338205, guid: fec13a154c7f73b5b817659cbb9456b8, type: 3}
       propertyPath: m_Name
-      value: Bullet_AOE
+      value: Bullet_AOE1
       objectReference: {fileID: 0}
     - target: {fileID: 8084110718866993333, guid: fec13a154c7f73b5b817659cbb9456b8, type: 3}
       propertyPath: m_Size.x
@@ -93,4 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fb9f7187304d8f9842d97408cf6745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  range: 1

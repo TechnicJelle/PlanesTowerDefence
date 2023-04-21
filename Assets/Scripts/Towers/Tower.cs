@@ -10,6 +10,7 @@ namespace Towers
 		[Range(1, 10)] [SerializeField] private float range = 3f;
 		[SerializeField] private float fireRate = 1f;
 		[SerializeField] private GameObject bulletPrefab;
+		[SerializeField] [CanBeNull] private GameObject upgradeTowerPrefab;
 
 		private Enemy _target;
 

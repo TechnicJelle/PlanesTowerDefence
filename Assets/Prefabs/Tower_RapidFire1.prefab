@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6043823260481442724, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: m_Name
-      value: Tower_RapidFire
+      value: Tower_RapidFire1
       objectReference: {fileID: 0}
     - target: {fileID: 6043823260481442725, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: m_Sprite
@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6710737729827901073, guid: 5bbef8382c957efbc96d5d85c3d25876, type: 3}
+    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
+      propertyPath: upgradeTower
+      value: 
+      objectReference: {fileID: 8933948514500205190, guid: 2a02969a39f19eafabdd4486dba67473, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
