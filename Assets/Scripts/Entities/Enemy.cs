@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using JetBrains.Annotations;
 using Managers;
 using Route;
 using UnityEngine;
@@ -28,15 +30,18 @@ namespace Entities
 
 		[Header("Turret")]
 		[Tooltip("Lower is slower")] [Range(0f, 0.2f)] [SerializeField] private float turretCornerTurnSpeed = 0.1f;
-		[SerializeField] private Vector2 turretRotationSpeedMinMax = new(1f,2f);
+		[SerializeField] private Vector2 turretRotationSpeedMinMax = new(1f, 2f);
 		[Range(0f, 180f)] [SerializeField] private float turretRotationAmount = 45f;
-
-		[Header("Money")]
-		[SerializeField] private int moneyValue = 10;
 
 		private Transform _turret;
 		private float _turretRotationSpeed;
 		private float _turretOffset;
+
+		[Header("Money")]
+		[SerializeField] private int moneyValue = 10;
+
+		//==Debuff==
+		private bool _isDebuffed;
 
 		private void Start()
 		{
@@ -49,6 +54,7 @@ namespace Entities
 				_beginNode = GameObject.Find("Start").GetComponent<Node>();
 				if (_beginNode == null) Debug.LogError("Begin node not found");
 			}
+
 			if (_endNode == null)
 			{
 				_endNode = GameObject.Find("End").GetComponent<Node>();
@@ -61,7 +67,7 @@ namespace Entities
 
 			//==Health Bar==
 			_healthBar = GetComponentInChildren<Slider>();
-			if(_healthBar == null) Debug.LogError("Health bar not found");
+			if (_healthBar == null) Debug.LogError("Health bar not found");
 			_healthBar.maxValue = startHealth;
 			_health = startHealth;
 			_healthBar.value = _health;
@@ -71,7 +77,7 @@ namespace Entities
 
 			//==Turret==
 			_turret = transform.Find("Turret");
-			if(_turret == null) Debug.LogError("Turret not found");
+			if (_turret == null) Debug.LogError("Turret not found");
 			_turretRotationSpeed = Random.Range(turretRotationSpeedMinMax.x, turretRotationSpeedMinMax.y);
 			_turretOffset = Random.Range(0f, 1000f);
 		}
@@ -86,7 +92,7 @@ namespace Entities
 			if (transform.position == _nextNode.transform.position)
 			{
 				_currentNode = _nextNode;
-				if(_currentNode == _endNode)
+				if (_currentNode == _endNode)
 				{
 					PlayerStatsManager.Instance.TakeDamage(1);
 					Destroy(gameObject);
@@ -135,6 +141,25 @@ namespace Entities
 			_health -= amount;
 			if (_health > 0f) return;
 			Die();
+		}
+
+		public void Debuff(float factor, float duration, [CanBeNull] GameObject visual = null)
+		{
+			if (_isDebuffed) StopCoroutine(nameof(DebuffCoroutine)); //stop previous debuff, to reapply it for the full duration anew
+			StartCoroutine(DebuffCoroutine(factor, duration, visual));
+		}
+
+		private IEnumerator DebuffCoroutine(float factor, float duration, [CanBeNull] GameObject visual = null)
+		{
+			_isDebuffed = true;
+			GameObject visualInstance = visual != null ? Instantiate(visual, transform) : null;
+			speed *= factor;
+
+			yield return new WaitForSeconds(duration);
+
+			speed /= factor;
+			if (visualInstance != null) Destroy(visualInstance);
+			_isDebuffed = false;
 		}
 
 		private void Die()
