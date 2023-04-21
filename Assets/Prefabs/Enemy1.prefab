@@ -69,6 +69,7 @@ MonoBehaviour:
   turretCornerTurnSpeed: 0.03
   turretRotationSpeedMinMax: {x: 1, y: 2}
   turretRotationAmount: 15
+  moneyValue: 10
 --- !u!50 &-4754602922323514872
 Rigidbody2D:
   serializedVersion: 4

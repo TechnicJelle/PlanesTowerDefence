@@ -62,7 +62,7 @@ namespace Managers
 
 				//Spawn wave
 				wave.StartWave();
-				OnWaveStart?.Invoke();
+				OnWaveStart.Invoke();
 				waveCountdownText.text = "";
 				waveText.text = $"Current wave: {humanWaveNr}";
 
@@ -72,7 +72,7 @@ namespace Managers
 					yield return new WaitForSeconds(0.5f);
 				}
 
-				OnWaveEnd?.Invoke();
+				OnWaveEnd.Invoke();
 			}
 
 			//All waves have spawned, so clear the text
@@ -82,7 +82,7 @@ namespace Managers
 
 		private void ResetWaves()
 		{
-			Debug.Log("Resetting game");
+			OnWaveEnd.Invoke();
 			foreach (Enemy enemy in FindObjectsOfType<Enemy>())
 			{
 				Destroy(enemy.gameObject);

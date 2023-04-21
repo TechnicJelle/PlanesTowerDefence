@@ -2,7 +2,7 @@ using Entities;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Tower
+namespace Towers
 {
 	public class Tower : MonoBehaviour
 	{

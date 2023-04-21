@@ -1,6 +1,7 @@
 using System;
+using Managers;
 using TMPro;
-using Tower;
+using Towers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ namespace UI
 		public TowerContainer TowerContainer { get; set; }
 
 		private Canvas _canvas;
+		private Button[] _buttons;
 
 		private void Awake()
 		{
@@ -35,38 +37,43 @@ namespace UI
 			}
 
 			// Create buttons
+			_buttons = new Button[choices.Length];
 			for (int i = 0; i < choices.Length; i++)
 			{
 				Choice choice = choices[i];
-				GameObject instance = Instantiate(_buttonPrefab, _canvas.transform);
-				instance.name = "btn_" + choice.label;
+				GameObject buttonInstance = Instantiate(_buttonPrefab, _canvas.transform);
+				buttonInstance.name = "btn_" + choice.label;
 
-				instance.transform.localScale = new Vector3(1f, 1f, 1f);
+				int price = choice.Tower.price;
+
+				buttonInstance.transform.localScale = new Vector3(1f, 1f, 1f);
 
 				// Set button position
 				float angle = 2f * Mathf.PI / choices.Length * i - Mathf.PI - Mathf.PI / choices.Length;
-				instance.transform.localPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+				buttonInstance.transform.localPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 
 				// Set button texts
-				TextMeshProUGUI[] texts = instance.GetComponentsInChildren<TextMeshProUGUI>();
+				TextMeshProUGUI[] texts = buttonInstance.GetComponentsInChildren<TextMeshProUGUI>();
 
 				foreach (TextMeshProUGUI text in texts)
 				{
 					text.text = text.name switch
 					{
 						{ } a when a.IndexOf("Name", StringComparison.OrdinalIgnoreCase) >= 0 => choice.label,
-						{ } a when a.IndexOf("Price", StringComparison.OrdinalIgnoreCase) >= 0 => choice.gameObject.GetComponent<Tower.Tower>().price.ToString(),
+						{ } a when a.IndexOf("Price", StringComparison.OrdinalIgnoreCase) >= 0 => price.ToString(),
 						_ => text.text,
 					};
 				}
 
 				// Set button image
-				Image image = instance.GetComponent<Image>();
+				Image image = buttonInstance.GetComponent<Image>();
 				image.sprite = choice.gameObject.GetComponent<SpriteRenderer>().sprite;
 
 				// Set button click event
-				Button button = instance.GetComponentInChildren<Button>();
+				Button button = buttonInstance.GetComponentInChildren<Button>();
 				button.onClick.AddListener(() => OnChoiceClicked(choice));
+
+				_buttons[i] = button;
 			}
 
 			Hide();
@@ -74,6 +81,7 @@ namespace UI
 
 		private void OnChoiceClicked(Choice choice)
 		{
+			PlayerStatsManager.Instance.Buy(choice.Tower.price);
 			TowerContainer.tower = Instantiate(choice.gameObject, TowerContainer.transform);
 			Hide();
 		}
@@ -81,18 +89,23 @@ namespace UI
 		public void Show()
 		{
 			_canvas.enabled = true;
+			for (int i = 0; i < choices.Length; i++)
+				_buttons[i].interactable = PlayerStatsManager.Instance.HaveEnoughMoneyFor(choices[i].Tower.price);
 		}
 
 		public void Hide()
 		{
 			_canvas.enabled = false;
 		}
+
+		public bool IsOpen => _canvas.enabled;
 	}
 
 	[Serializable]
 	internal class Choice
 	{
 		public GameObject gameObject;
+		public Tower Tower => gameObject.GetComponent<Tower>();
 		public string label;
 	}
 }

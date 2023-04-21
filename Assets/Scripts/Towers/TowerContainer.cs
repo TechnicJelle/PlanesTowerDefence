@@ -1,39 +1,48 @@
+using System;
 using JetBrains.Annotations;
 using Managers;
 using UI;
 using UnityEngine;
 
-namespace Tower
+namespace Towers
 {
 	public class TowerContainer : MonoBehaviour
 	{
-		private SpriteRenderer _spriteRenderer;
+		private SpriteRenderer _highlightSprite;
 		private RadialSelector _choiceSelector;
 
 		[HideInInspector] [CanBeNull] public GameObject tower;
-
-		private bool _buyMenuOpen;
 
 		private void Awake()
 		{
 			_choiceSelector = GetComponent<RadialSelector>();
 			_choiceSelector.TowerContainer = this;
-			_spriteRenderer = GetComponent<SpriteRenderer>();
-			OnMouseExit();
+			_highlightSprite = GetComponent<SpriteRenderer>();
+			OnMouseExit(); //disable any highlights from the start
 		}
 
 		private void Start()
 		{
-			WaveManager.Instance.OnWaveStart += _choiceSelector.Hide;
+			GameStateManager.Instance.OnResetGame += ResetTower;
+
+			WaveManager.Instance.OnWaveStart += _choiceSelector.Hide; //disable any open buy menus
+			WaveManager.Instance.OnWaveStart += OnMouseExit; //disable any active highlights
 		}
 
 		private void OnMouseEnter()
 		{
 			if (!GameStateManager.Instance.IsRunning) return;
 			if (WaveManager.Instance.IsWaveRunning) return;
-			Color color = _spriteRenderer.color;
+			Color color = _highlightSprite.color;
 			color.a = 1f;
-			_spriteRenderer.color = color;
+			_highlightSprite.color = color;
+		}
+
+		private void OnMouseOver()
+		{
+			//for when the mouse is already over the container when it becomes active
+			if (!_choiceSelector.IsOpen)
+				OnMouseEnter();
 		}
 
 		private void OnMouseUp()
@@ -42,16 +51,10 @@ namespace Tower
 			if (WaveManager.Instance.IsWaveRunning) return;
 			if (tower == null)
 			{
-				if (_buyMenuOpen)
-				{
+				if (_choiceSelector.IsOpen)
 					_choiceSelector.Hide();
-					_buyMenuOpen = false;
-				}
 				else
-				{
 					_choiceSelector.Show();
-					_buyMenuOpen = true;
-				}
 			}
 			else
 			{
@@ -62,9 +65,15 @@ namespace Tower
 
 		private void OnMouseExit()
 		{
-			Color color = _spriteRenderer.color;
+			Color color = _highlightSprite.color;
 			color.a = 0f;
-			_spriteRenderer.color = color;
+			_highlightSprite.color = color;
+		}
+
+		private void ResetTower()
+		{
+			Destroy(tower);
+			tower = null;
 		}
 	}
 }

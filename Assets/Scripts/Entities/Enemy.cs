@@ -7,7 +7,7 @@ namespace Entities
 {
 	public class Enemy : MonoBehaviour
 	{
-		//==Route==
+		[Header("Route")]
 		[SerializeField] private float speed = 5f;
 		private static Node _beginNode;
 		private static Node _endNode;
@@ -15,19 +15,22 @@ namespace Entities
 		private Node _currentNode;
 		private Node _nextNode;
 
-		//==Health Bar==
+		[Header("Health Bar")]
 		[SerializeField] private float startHealth = 100f;
 		private Slider _healthBar;
 		private float _health;
 
-		//==Body==
+		[Header("Body")]
 		[Tooltip("Lower is slower")] [Range(0f, 0.2f)] [SerializeField] private float bodyCornerTurnSpeed = 0.1f;
 		private Transform _body;
 
-		//==Turret==
+		[Header("Turret")]
 		[Tooltip("Lower is slower")] [Range(0f, 0.2f)] [SerializeField] private float turretCornerTurnSpeed = 0.1f;
 		[SerializeField] private Vector2 turretRotationSpeedMinMax = new(1f,2f);
 		[Range(0f, 180f)] [SerializeField] private float turretRotationAmount = 45f;
+
+		[Header("Money")]
+		[SerializeField] private int moneyValue = 10;
 
 		private Transform _turret;
 		private float _turretRotationSpeed;
@@ -136,6 +139,12 @@ namespace Entities
 		{
 			_health -= amount;
 			if (_health > 0f) return;
+			Die();
+		}
+
+		private void Die()
+		{
+			PlayerStatsManager.Instance.AddMoney(moneyValue);
 			Destroy(gameObject);
 		}
 	}
