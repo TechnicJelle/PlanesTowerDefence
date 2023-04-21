@@ -89,6 +89,10 @@ namespace UI
 		public void Show()
 		{
 			_canvas.enabled = true;
+		}
+
+		private void Update()
+		{
 			for (int i = 0; i < choices.Length; i++)
 				_buttons[i].interactable = PlayerStatsManager.Instance.HaveEnoughMoneyFor(choices[i].Tower.price);
 		}
