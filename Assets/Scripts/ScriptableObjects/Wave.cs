@@ -6,7 +6,7 @@ namespace ScriptableObjects
 	[CreateAssetMenu(fileName = "Wave", menuName = "ScriptableObjects/Wave")]
 	public class Wave : ScriptableObject
 	{
-		[SerializeField] public int delaySincePreviousWave;
+		[Tooltip("Time for building phase")] [SerializeField] public int delaySincePreviousWave;
 		[SerializeField] private WavePart[] waveParts;
 
 		public void StartWave()

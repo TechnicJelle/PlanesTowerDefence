@@ -69,7 +69,8 @@ MonoBehaviour:
   turretCornerTurnSpeed: 0.03
   turretRotationSpeedMinMax: {x: 1, y: 2}
   turretRotationAmount: 15
-  moneyValue: 10
+  moneyValue: 20
+  cashNotifPrefab: {fileID: 1890365169345750523, guid: 0a1fa639780a370488b1a958dd9d48f0, type: 3}
 --- !u!50 &-4754602922323514872
 Rigidbody2D:
   serializedVersion: 4

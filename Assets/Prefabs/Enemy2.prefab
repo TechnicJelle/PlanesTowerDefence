@@ -17,6 +17,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 674370082915769916, guid: f5ae2ff3ea7badc94891892ce9a4fc87, type: 3}
+      propertyPath: moneyValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 674370082915769916, guid: f5ae2ff3ea7badc94891892ce9a4fc87, type: 3}
       propertyPath: startHealth
       value: 20
       objectReference: {fileID: 0}

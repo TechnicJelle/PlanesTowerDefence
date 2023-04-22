@@ -39,6 +39,7 @@ namespace Entities
 
 		[Header("Money")]
 		[SerializeField] private int moneyValue = 10;
+		[SerializeField] private GameObject cashNotifPrefab;
 
 		//==Debuff==
 		private bool _isDebuffed;
@@ -166,6 +167,8 @@ namespace Entities
 		{
 			PlayerStatsManager.Instance.AddMoney(moneyValue);
 			Destroy(gameObject);
+			GameObject instance = Instantiate(cashNotifPrefab, transform.position, Quaternion.identity);
+			instance.GetComponent<CashNotif>().SetAmount(moneyValue);
 		}
 	}
 }
