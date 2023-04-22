@@ -1,23 +1,25 @@
-name: Generate Diagrams
+name: Generate PlantUML
 on: push
+env:
+  PUML_FOLDER: PlantUML
 jobs:
   generate_plantuml:
     runs-on: ubuntu-latest
-    name: plantuml
+    name: Generate PlantUML
     steps:
       - name: Install Dependencies
         run: |
           sudo apt-get install graphviz
           sudo mkdir -p /opt/plantuml
           cd /opt/plantuml
-          UML=https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
+          UML=https://github.com/plantuml/plantuml/releases/download/v1.2023.6/plantuml.jar
           sudo curl -JLO ${UML}
       - name: Checkout Repository
         uses: actions/checkout@v3.5.2
       - name: Process Diagrams
-        run: java -jar /opt/plantuml/plantuml.jar -v -tsvg -r -o "." "PlantUML/**.puml"
+        run: java -jar /opt/plantuml/plantuml.jar -v -tsvg -r -o "." "$PUML_FOLDER/**.puml"
       - name: Display Diagrams
-        run: pwd &&  ls PlantUML/** | grep \.svg$
+        run: pwd &&  ls $PUML_FOLDER/** | grep \.svg$
       - name: Commit Diagrams
         run: |
           git config --local user.email "action@github.com"
@@ -25,6 +27,6 @@ jobs:
           git add .
           git commit -m "Auto-Generated PlantUML Diagrams" || exit 0
       - name: Push Diagrams
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
