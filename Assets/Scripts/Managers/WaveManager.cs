@@ -33,7 +33,7 @@ namespace Managers
 		private void Start()
 		{
 			GameStateManager.Instance.OnGameStart += StartWaves;
-			GameStateManager.Instance.OnGameOver += StopAllCoroutines;
+			GameStateManager.Instance.OnGameEnd += StopAllCoroutines;
 			GameStateManager.Instance.OnResetGame += ResetWaves;
 
 			OnWaveStart += () => IsWaveRunning = true;
@@ -66,11 +66,7 @@ namespace Managers
 				waveCountdownText.text = "";
 				waveText.text = $"Current wave: {humanWaveNr}";
 
-				//Wait until all enemies are defeated
-				while (FindObjectsOfType<Enemy>().Length > 0)
-				{
-					yield return new WaitForSeconds(0.5f);
-				}
+				yield return WaitForAllEnemiesDefeated();
 
 				OnWaveEnd?.Invoke();
 			}
@@ -78,15 +74,36 @@ namespace Managers
 			//All waves have spawned, so clear the text
 			// waveText.text = "No waves left";
 			waveCountdownText.text = "";
+
+			yield return WaitForAllEnemiesDefeated();
+
+			GameStateManager.Instance.GameWin();
+		}
+
+		/// <summary>
+		/// Wait until all enemies are defeated
+		/// </summary>
+		private static IEnumerator WaitForAllEnemiesDefeated()
+		{
+			while (GetEnemies().Length > 0)
+			{
+				yield return new WaitForSeconds(0.5f);
+			}
 		}
 
 		private void ResetWaves()
 		{
 			OnWaveEnd?.Invoke();
-			foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+			foreach (Enemy enemy in GetEnemies())
 			{
 				Destroy(enemy.gameObject);
 			}
+		}
+
+		public static Enemy[] GetEnemies()
+		{
+			//TODO: Improve this, probably by keeping track of enemies in a list, manually
+			return FindObjectsOfType<Enemy>();
 		}
 	}
 }

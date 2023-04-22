@@ -1,5 +1,6 @@
 using Entities;
 using JetBrains.Annotations;
+using Managers;
 using UnityEngine;
 
 namespace Towers
@@ -47,8 +48,7 @@ namespace Towers
 		[CanBeNull]
 		private Enemy GetClosestEnemy()
 		{
-			//TODO: Refactor this
-			Enemy[] enemies = FindObjectsOfType<Enemy>();
+			Enemy[] enemies = WaveManager.GetEnemies();
 			Enemy closestEnemy = null;
 			float closestDistance = Mathf.Infinity;
 			foreach (Enemy enemy in enemies)

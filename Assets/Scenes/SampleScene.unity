@@ -4941,7 +4941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1109007521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5085,7 +5085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1296362192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5508,7 +5508,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameView: {fileID: 1109007524}
-  gameOverView: {fileID: 2138533388}
+  gameEndView: {fileID: 2138533388}
+  endGameText: {fileID: 2046700967}
+  gameOverText: Game Over!
+  gameWinText: You Win!
 --- !u!1 &1734717530
 GameObject:
   m_ObjectHideFlags: 0
@@ -5723,6 +5726,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 20
+  startMoney: 200
+  sellMultiplier: 0.5
   statsText: {fileID: 2016766862}
 --- !u!4 &1947843168
 Transform:
@@ -6028,7 +6033,7 @@ GameObject:
   - component: {fileID: 2046700966}
   - component: {fileID: 2046700965}
   m_Layer: 5
-  m_Name: txt_GameOver
+  m_Name: txt_GameEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6143,7 +6148,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game Over!
+  m_text: '{0}
 
 
     Click to go back to the main menu'
@@ -6369,7 +6374,7 @@ GameObject:
   - component: {fileID: 2138533387}
   - component: {fileID: 2138533388}
   m_Layer: 5
-  m_Name: pnl_GameOver
+  m_Name: pnl_GameEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

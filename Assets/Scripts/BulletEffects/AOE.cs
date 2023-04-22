@@ -1,4 +1,5 @@
 using Entities;
+using Managers;
 using UnityEngine;
 
 namespace BulletEffects
@@ -18,7 +19,7 @@ namespace BulletEffects
 
 		private void OnEnemyHit(Enemy enemy)
 		{
-			Enemy[] enemies = FindObjectsOfType<Enemy>();
+			Enemy[] enemies = WaveManager.GetEnemies();
 
 			//find all enemies within the range
 			foreach (Enemy e in enemies)

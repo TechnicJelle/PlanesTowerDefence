@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UI;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Managers
 	{
 		Pregame,
 		Running,
-		Over,
+		End,
 	}
 
 	public class GameStateManager : MonoBehaviour
@@ -16,13 +17,18 @@ namespace Managers
 		public static GameStateManager Instance;
 
 		public Action OnGameStart;
-		public Action OnGameOver;
+		public Action OnGameEnd;
 		public Action OnResetGame;
 
 		[SerializeField] private View inGameView;
-		[SerializeField] private View gameOverView;
+		[SerializeField] private View gameEndView;
+		[SerializeField] private TMP_Text endGameText;
+		[SerializeField] private string gameOverText = "Game Over!";
+		[SerializeField] private string gameWinText = "You Win!";
 
 		private GameState _state;
+
+		private string _endGameText;
 
 		private void Awake()
 		{
@@ -36,14 +42,15 @@ namespace Managers
 			}
 
 			_state = GameState.Pregame;
+			_endGameText = endGameText.text;
 
 			if (inGameView == null) Debug.LogError("In Game View is null!");
-			if (gameOverView == null) Debug.LogError("Game Over View is null!");
+			if (gameEndView == null) Debug.LogError("Game End View is null!");
 		}
 
 		public bool IsPregame => _state == GameState.Pregame;
 		public bool IsRunning => _state == GameState.Running;
-		public bool IsOver => _state == GameState.Over;
+		public bool IsEnded => _state == GameState.End;
 
 		public void StartGame()
 		{
@@ -57,15 +64,29 @@ namespace Managers
 		{
 			if (_state != GameState.Running) return;
 			Debug.Log("Game Over!");
-			_state = GameState.Over;
-			OnGameOver?.Invoke();
+			endGameText.text = string.Format(_endGameText, gameOverText);
+			GameEnd();
+		}
+
+		public void GameWin()
+		{
+			if (_state != GameState.Running) return;
+			Debug.Log("Game Win!");
+			endGameText.text = string.Format(_endGameText, gameWinText);
+			GameEnd();
+		}
+
+		private void GameEnd()
+		{
+			_state = GameState.End;
+			OnGameEnd?.Invoke();
 			inGameView.Hide();
-			gameOverView.Show();
+			gameEndView.Show();
 		}
 
 		public void RestartGame()
 		{
-			if (_state != GameState.Over) return;
+			if (_state != GameState.End) return;
 			Debug.Log("Restarting game!");
 			_state = GameState.Pregame;
 			OnResetGame?.Invoke();
