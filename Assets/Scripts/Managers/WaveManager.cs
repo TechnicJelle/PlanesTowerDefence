@@ -15,12 +15,14 @@ namespace Managers
 		public Action OnWaveEnd;
 		public bool IsWaveRunning { get; private set; }
 
+		[SerializeField] private string strPrepareToBeAttackedByWave = "Prepare to be attacked by wave {0}!";
+		[SerializeField] private string strTimeTillNextWave = "Time till next wave: {0}";
+		[SerializeField] private string strCurrentWave = "Current wave: {0}";
+
 		[SerializeField] private Wave[] waves;
 
 		[SerializeField] private TextMeshProUGUI waveText;
 		[SerializeField] private TextMeshProUGUI waveCountdownText;
-
-		private const string STR_PREPARE_TO_BE_ATTACKED_BY_WAVE = "Prepare to be attacked by wave {0}!";
 
 		private void Awake()
 		{
@@ -50,13 +52,13 @@ namespace Managers
 			for (int waveNr = 0; waveNr < waves.Length; waveNr++)
 			{
 				int humanWaveNr = waveNr + 1;
-				waveText.text = string.Format(STR_PREPARE_TO_BE_ATTACKED_BY_WAVE, humanWaveNr);
+				waveText.text = string.Format(strPrepareToBeAttackedByWave, humanWaveNr);
 
 				//Wait until wave starts
 				Wave wave = waves[waveNr];
 				for (int i = 0; i < wave.delaySincePreviousWave + 1; i++)
 				{
-					waveCountdownText.text = $"Time till next wave: {wave.delaySincePreviousWave - i}";
+					waveCountdownText.text = string.Format(strTimeTillNextWave, wave.delaySincePreviousWave - i);
 					yield return new WaitForSeconds(1);
 				}
 
@@ -64,7 +66,7 @@ namespace Managers
 				wave.StartWave();
 				OnWaveStart?.Invoke();
 				waveCountdownText.text = "";
-				waveText.text = $"Current wave: {humanWaveNr}";
+				waveText.text = string.Format(strCurrentWave, humanWaveNr);
 
 				yield return WaitForAllEnemiesDefeated();
 
@@ -72,7 +74,6 @@ namespace Managers
 			}
 
 			//All waves have spawned, so clear the text
-			// waveText.text = "No waves left";
 			waveCountdownText.text = "";
 
 			yield return WaitForAllEnemiesDefeated();

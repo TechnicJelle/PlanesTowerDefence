@@ -902,6 +902,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9202440a1c6613b6ea7f12057bc8674c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strPrepareToBeAttackedByWave: Prepare to be attacked by wave {0}!
+  strTimeTillNextWave: 'Time till next wave: {0}'
+  strCurrentWave: 'Current wave: {0}'
   waves:
   - {fileID: 11400000, guid: 7e70bb4c7034cdb68b15690f46bf3201, type: 2}
   - {fileID: 11400000, guid: 0da9c78ab466b1463823558e969acb0e, type: 2}
@@ -5387,6 +5390,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
