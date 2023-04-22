@@ -1,0 +1,9 @@
+@startuml
+class Debuff {
+    - speedFactor : float = 0.5f
+    - duration : float = 2f
+    # <<override>> OnEnemyHit(enemy:Enemy) : void
+}
+ABulletEffect <|-- Debuff
+Debuff --> "visualEffectPrefab" GameObject
+@enduml

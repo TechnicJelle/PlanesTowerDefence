@@ -1,0 +1,17 @@
+@startuml
+class Tower {
+    + price : int = 100
+    - range : float = 3f
+    - fireRate : float = 1f
+    - Start() : void
+    - Fire() : void
+    - Update() : void
+    - GetClosestEnemy() : Enemy
+    - OnDrawGizmos() : void
+    + GetNextUpgrade() : GameObject
+}
+MonoBehaviour <|-- Tower
+Tower --> "bulletPrefab" GameObject
+Tower --> "upgradeTowerPrefab" GameObject
+Tower --> "_target" Enemy
+@enduml

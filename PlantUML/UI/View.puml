@@ -1,0 +1,7 @@
+@startuml
+class View {
+    + Show() : void
+    + Hide() : void
+}
+MonoBehaviour <|-- View
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class CashNotif {
+    - timeToDisplay : float = 1
+    - moveUpSpeed : float = 1
+    - Awake() : void
+    + SetAmount(amount:int) : void
+    - Update() : void
+    - Disappear() : IEnumerator
+}
+MonoBehaviour <|-- CashNotif
+CashNotif --> "_text" TMP_Text
+@enduml

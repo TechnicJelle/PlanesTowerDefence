@@ -1,0 +1,16 @@
+@startuml
+class TowerSelector {
+    - Start() : void
+    # <<override>> OnChoiceClicked(choice:IChoice) : void
+}
+class TowerChoice {
+    - buttonLabel : string
+    + Label : string <<get>>
+    + Price : int <<get>>
+}
+RadialSelector <|-- TowerSelector
+IChoice <|-- TowerChoice
+TowerChoice --> "prefab" GameObject
+TowerChoice --> "Tower" Tower
+TowerChoice --> "Sprite" Sprite
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class ButtonViewNavigation {
+    # Awake() : void
+    # SwitchPanel() : void
+}
+MonoBehaviour <|-- ButtonViewNavigation
+ButtonViewNavigation --> "gotoView" View
+ButtonViewNavigation --> "ThisButton" Button
+ButtonViewNavigation --> "_parentView" View
+@enduml

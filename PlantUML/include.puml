@@ -1,0 +1,26 @@
+@startuml
+!include ./UI/RadialSelector.puml
+!include ./UI/View.puml
+!include ./UI/ButtonViewNavigation.puml
+!include ./UI/ButtonAutoViewNavigation.puml
+!include ./UI/UpgradeSelector.puml
+!include ./UI/TowerSelector.puml
+!include ./Editor/ViewIsolator.puml
+!include ./Editor/Isolator.puml
+!include ./ScriptableObjects/Wave.puml
+!include ./Managers/WaveManager.puml
+!include ./Managers/GameStateManager.puml
+!include ./Managers/PlayerStatsManager.puml
+!include ./BulletEffects/ABulletEffect.puml
+!include ./BulletEffects/Debuff.puml
+!include ./BulletEffects/AOE.puml
+!include ./Route/Node.puml
+!include ./Route/NodeDrawer.puml
+!include ./Route/NodeSetup.puml
+!include ./Entities/CashNotif.puml
+!include ./Entities/Bullet.puml
+!include ./Entities/Enemy.puml
+!include ./Tools/ColourChanger.puml
+!include ./Towers/Tower.puml
+!include ./Towers/TowerContainer.puml
+@enduml

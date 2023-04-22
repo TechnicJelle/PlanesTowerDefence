@@ -12,7 +12,7 @@ namespace Managers
 		[SerializeField] private int startMoney = 200;
 		[Range(0.0f, 1.0f)] [SerializeField] private float sellMultiplier = 0.5f;
 
-		[SerializeField] private TextMeshProUGUI statsText;
+		[SerializeField] private TMP_Text statsText;
 
 		private string _statsText;
 

@@ -1,0 +1,21 @@
+@startuml
+class WaveManager {
+    + IsWaveRunning : bool <<get>>
+    - strPrepareToBeAttackedByWave : string = "Prepare to be attacked by wave {0&#125;!"
+    - strTimeTillNextWave : string = "Time till next wave: {0&#125;"
+    - strCurrentWave : string = "Current wave: {0&#125;"
+    - Awake() : void
+    - Start() : void
+    - StartWaves() : void
+    - SpawnWaves() : IEnumerator
+    - {static} WaitForAllEnemiesDefeated() : IEnumerator
+    - ResetWaves() : void
+    + {static} GetEnemies() : Enemy[]
+}
+MonoBehaviour <|-- WaveManager
+WaveManager --> "Instance" WaveManager
+WaveManager --> "OnWaveStart" Action
+WaveManager --> "OnWaveEnd" Action
+WaveManager --> "waveText" TextMeshProUGUI
+WaveManager --> "waveCountdownText" TextMeshProUGUI
+@enduml

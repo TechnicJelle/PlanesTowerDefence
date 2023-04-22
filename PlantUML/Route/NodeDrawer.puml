@@ -1,0 +1,5 @@
+@startuml
+class NodeDrawer {
+}
+MonoBehaviour <|-- NodeDrawer
+@enduml

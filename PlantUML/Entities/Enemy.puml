@@ -1,0 +1,31 @@
+@startuml
+class Enemy {
+    - speed : float = 5f
+    - startHealth : float = 100f
+    - _health : float
+    - bodyCornerTurnSpeed : float = 0.1f
+    - turretCornerTurnSpeed : float = 0.1f
+    - turretRotationAmount : float = 45f
+    - _turretRotationSpeed : float
+    - _turretOffset : float
+    - moneyValue : int = 10
+    - _isDebuffed : bool
+    - Start() : void
+    - Update() : void
+    - ChooseNextNode() : Node
+    + Damage(amount:float) : void
+    + Debuff(factor:float, duration:float, visual:GameObject) : void
+    - DebuffCoroutine(factor:float, duration:float, visual:GameObject) : IEnumerator
+    - Die() : void
+}
+MonoBehaviour <|-- Enemy
+Enemy --> "_beginNode" Node
+Enemy --> "_endNode" Node
+Enemy --> "_currentNode" Node
+Enemy --> "_nextNode" Node
+Enemy --> "_healthBar" Slider
+Enemy --> "_body" Transform
+Enemy o-> "turretRotationSpeedMinMax" Vector2
+Enemy --> "_turret" Transform
+Enemy --> "cashNotifPrefab" GameObject
+@enduml

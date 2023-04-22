@@ -1,0 +1,22 @@
+@startuml
+class RadialSelector {
+    - Awake() : void
+    # Init(choices:IChoice[]) : void
+    + UpdateButtons() : void
+    # <<virtual>> OnChoiceClicked(choice:IChoice) : void
+    + Show() : void
+    - Update() : void
+    + Hide() : void
+    + IsOpen : bool <<get>>
+}
+interface IChoice {
+    + Label : string <<get>>
+    + Price : int <<get>>
+}
+MonoBehaviour <|-- RadialSelector
+RadialSelector --> "_canvasPrefab" GameObject
+RadialSelector --> "_buttonPrefab" GameObject
+RadialSelector --> "_canvas" Canvas
+RadialSelector --> "TowerContainer" TowerContainer
+IChoice --> "Sprite" Sprite
+@enduml

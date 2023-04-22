@@ -1,0 +1,21 @@
+@startuml
+class PlayerStatsManager {
+    - startHealth : int = 20
+    - startMoney : int = 200
+    - sellMultiplier : float = 0.5f
+    - _statsText : string
+    - _currentHealth : int
+    - _currentMoney : int
+    - Awake() : void
+    - StartGame() : void
+    - UpdateText() : void
+    + TakeDamage(damage:int) : void
+    + Sell(price:int) : void
+    + AddMoney(amount:int) : void
+    + Buy(price:int) : void
+    + HaveEnoughMoneyFor(price:int) : bool
+}
+MonoBehaviour <|-- PlayerStatsManager
+PlayerStatsManager --> "Instance" PlayerStatsManager
+PlayerStatsManager --> "statsText" TMP_Text
+@enduml

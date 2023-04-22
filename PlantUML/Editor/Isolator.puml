@@ -1,0 +1,8 @@
+@startuml
+abstract class "Isolator`1"<T> {
+    # {abstract} Enabled : bool <<get>>
+    {static} - Isolator()
+    - OnEnable() : void
+}
+"Isolator`1" --> "_last" Object
+@enduml

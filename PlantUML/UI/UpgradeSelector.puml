@@ -1,0 +1,34 @@
+@startuml
+class UpgradeSelector {
+    - Start() : void
+    # <<override>> OnChoiceClicked(choice:IChoice) : void
+    + SetNextUpgrade(nextTowerPrefab:GameObject) : void
+}
+class UpgradeChoice {
+    - buttonLabelUpgrade : string = "Upgrade"
+    - buttonLabelMax : string = "Max"
+    - _buttonLabel : string
+    + price : int
+    + Label : string <<get>>
+    + Price : int <<get>>
+    + UpgradeChoice()
+    + SetUpgrade() : void
+    + SetMax() : void
+}
+class SellChoice {
+    - buttonLabel : string = "Sell"
+    + Label : string <<get>>
+    + Price : int <<get>>
+}
+RadialSelector <|-- UpgradeSelector
+UpgradeSelector --> "sellChoice" SellChoice
+UpgradeSelector --> "upgradeChoice" UpgradeChoice
+IChoice <|-- UpgradeChoice
+UpgradeChoice --> "maxSprite" Sprite
+UpgradeChoice --> "NextTowerPrefab" GameObject
+UpgradeChoice --> "sprite" Sprite
+UpgradeChoice --> "Sprite" Sprite
+IChoice <|-- SellChoice
+SellChoice --> "sprite" Sprite
+SellChoice --> "Sprite" Sprite
+@enduml

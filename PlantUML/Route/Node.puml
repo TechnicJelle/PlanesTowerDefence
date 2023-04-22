@@ -1,0 +1,13 @@
+@startuml
+class Node {
+    + amountOfTimesVisited : int
+    - Awake() : void
+    - Update() : void
+    - DrawArrow(startPos:Vector3, endPos:Vector3) : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- Node
+Node o-> "nextNodes<Node>" "List`1"
+Node --> "_ownColour" Color
+@enduml

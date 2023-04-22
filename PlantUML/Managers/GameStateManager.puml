@@ -1,0 +1,30 @@
+@startuml
+enum GameState {
+    Pregame,
+    Running,
+    End,
+}
+class GameStateManager {
+    - gameOverText : string = "Game Over!"
+    - gameWinText : string = "You Win!"
+    - _endGameText : string
+    - Awake() : void
+    + IsPregame : bool <<get>>
+    + IsRunning : bool <<get>>
+    + IsEnded : bool <<get>>
+    + StartGame() : void
+    + GameOver() : void
+    + GameWin() : void
+    - GameEnd() : void
+    + RestartGame() : void
+}
+MonoBehaviour <|-- GameStateManager
+GameStateManager --> "Instance" GameStateManager
+GameStateManager --> "OnGameStart" Action
+GameStateManager --> "OnGameEnd" Action
+GameStateManager --> "OnResetGame" Action
+GameStateManager --> "inGameView" View
+GameStateManager --> "gameEndView" View
+GameStateManager --> "endGameText" TMP_Text
+GameStateManager --> "_state" GameState
+@enduml
