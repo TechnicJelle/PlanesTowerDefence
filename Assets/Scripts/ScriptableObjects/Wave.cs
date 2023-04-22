@@ -15,7 +15,7 @@ namespace ScriptableObjects
 			foreach (WavePart wavePart in waveParts)
 			{
 				if (wavePart.enemyPrefab == null) Debug.LogError("Enemy prefab is null!");
-				if (wavePart.enemyPrefab.GetComponent<Enemy>() == null) Debug.LogError($"Enemy prefab \"{wavePart.enemyPrefab.name}\" does not have an Enemy component!");
+				if (wavePart.enemyPrefab.GetComponent<Enemy>() == null) Debug.LogError($"{name}: Enemy prefab \"{wavePart.enemyPrefab.name}\" does not have an Enemy component!");
 			}
 		}
 

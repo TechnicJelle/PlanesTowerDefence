@@ -47,6 +47,7 @@ namespace Managers
 
 		public void TakeDamage(int damage)
 		{
+			if (damage <= 0) throw new ArgumentOutOfRangeException(nameof(damage));
 			_currentHealth -= damage;
 			UpdateText();
 			if (_currentHealth <= 0)
