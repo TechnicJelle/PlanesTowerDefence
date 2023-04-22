@@ -67,5 +67,11 @@ namespace Towers
 			Gizmos.color = Color.white;
 			Gizmos.DrawWireSphere(transform.position, range);
 		}
+
+		[CanBeNull]
+		public GameObject GetNextUpgrade()
+		{
+			return upgradeTowerPrefab;
+		}
 	}
 }

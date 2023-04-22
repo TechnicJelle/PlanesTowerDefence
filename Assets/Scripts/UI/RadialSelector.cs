@@ -1,6 +1,7 @@
 using System;
 using Managers;
 using TMPro;
+using Towers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ namespace UI
 
 		private Canvas _canvas;
 		private Button[] _buttons;
+
+		protected TowerContainer TowerContainer { get; private set; }
 
 		private void Awake()
 		{
@@ -32,6 +35,8 @@ namespace UI
 
 			_canvas = Instantiate(_canvasPrefab, transform).GetComponent<Canvas>();
 			_canvas.worldCamera = Camera.main;
+
+			TowerContainer = GetComponent<TowerContainer>();
 
 			Hide();
 		}
@@ -54,8 +59,25 @@ namespace UI
 				float angle = 2f * Mathf.PI / _choices.Length * i - Mathf.PI - Mathf.PI / _choices.Length;
 				buttonInstance.transform.localPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 
+				// Set button click event
+				Button button = buttonInstance.GetComponentInChildren<Button>();
+				button.onClick.AddListener(() => OnChoiceClicked(choice));
+
+				_buttons[i] = button;
+			}
+
+			UpdateButtons();
+		}
+
+		public void UpdateButtons()
+		{
+			for (int i = 0; i < _choices.Length; i++)
+			{
+				Button button = _buttons[i];
+				IChoice choice = _choices[i];
+
 				// Set button texts
-				TextMeshProUGUI[] texts = buttonInstance.GetComponentsInChildren<TextMeshProUGUI>();
+				TextMeshProUGUI[] texts = button.GetComponentsInChildren<TextMeshProUGUI>();
 
 				foreach (TextMeshProUGUI text in texts)
 				{
@@ -68,20 +90,13 @@ namespace UI
 				}
 
 				// Set button image
-				Image image = buttonInstance.GetComponent<Image>();
+				Image image = button.GetComponent<Image>();
 				image.sprite = choice.Sprite;
-
-				// Set button click event
-				Button button = buttonInstance.GetComponentInChildren<Button>();
-				button.onClick.AddListener(() => OnChoiceClicked(choice));
-
-				_buttons[i] = button;
 			}
 		}
 
 		protected virtual void OnChoiceClicked(IChoice choice)
 		{
-			PlayerStatsManager.Instance.Buy(choice.Price);
 			Hide();
 		}
 

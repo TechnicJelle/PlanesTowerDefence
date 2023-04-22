@@ -9,11 +9,8 @@ namespace UI
 	{
 		[SerializeField] private TowerChoice[] towerChoices;
 
-		private TowerContainer _towerContainer;
-
 		private void Start()
 		{
-			_towerContainer = GetComponent<TowerContainer>();
 			Init(towerChoices);
 		}
 
@@ -21,7 +18,9 @@ namespace UI
 		{
 			base.OnChoiceClicked(choice);
 			if (choice is TowerChoice towerChoice)
-				_towerContainer.SetTower(towerChoice.prefab);
+				TowerContainer.BuyTower(towerChoice.prefab);
+			else
+				Debug.LogError("Unknown choice type!");
 		}
 	}
 
@@ -29,7 +28,7 @@ namespace UI
 	internal class TowerChoice : IChoice
 	{
 		public GameObject prefab;
-		public string buttonLabel;
+		[SerializeField] private string buttonLabel;
 
 		public Tower Tower => prefab.GetComponent<Tower>();
 

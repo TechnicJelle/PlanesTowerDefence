@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: upgradeTower
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 787973606111994842, guid: 8eb5a65204b95f60599306a87f5d6796, type: 3}
+      propertyPath: upgradeTowerPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 787973606111994843, guid: 8eb5a65204b95f60599306a87f5d6796, type: 3}
       propertyPath: m_RootOrder
       value: 0

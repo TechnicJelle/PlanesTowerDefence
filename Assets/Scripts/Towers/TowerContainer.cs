@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using Managers;
 using UI;
@@ -9,16 +10,14 @@ namespace Towers
 	{
 		private SpriteRenderer _highlightSprite;
 		private TowerSelector _towerSelector;
-		// private RadialSelector _upgradeSelector;
+		private UpgradeSelector _upgradeSelector;
 
-		[CanBeNull] private GameObject _tower;
+		[CanBeNull] private GameObject _containedTower;
 
 		private void Awake()
 		{
 			_towerSelector = GetComponent<TowerSelector>();
-
-			// _upgradeSelector = GetComponent<RadialSelector>();
-			// _upgradeSelector.TowerContainer = this;
+			_upgradeSelector = GetComponent<UpgradeSelector>();
 
 			_highlightSprite = GetComponent<SpriteRenderer>();
 			OnMouseExit(); //disable any highlights from the start
@@ -26,9 +25,10 @@ namespace Towers
 
 		private void Start()
 		{
-			GameStateManager.Instance.OnResetGame += ResetTower;
+			GameStateManager.Instance.OnResetGame += RemoveContainedTower;
 
 			WaveManager.Instance.OnWaveStart += _towerSelector.Hide; //disable any open buy menus
+			WaveManager.Instance.OnWaveStart += _upgradeSelector.Hide; //disable any open upgrade menus
 			WaveManager.Instance.OnWaveStart += OnMouseExit; //disable any active highlights
 		}
 
@@ -44,7 +44,8 @@ namespace Towers
 		private void OnMouseOver()
 		{
 			//for when the mouse is already over the container when it becomes active
-			if (!_towerSelector.IsOpen)
+			//and there's not already a selector panel open
+			if (!_towerSelector.IsOpen && !_upgradeSelector.IsOpen)
 				OnMouseEnter();
 		}
 
@@ -52,7 +53,7 @@ namespace Towers
 		{
 			if (!GameStateManager.Instance.IsRunning) return;
 			if (WaveManager.Instance.IsWaveRunning) return;
-			if (_tower == null)
+			if (_containedTower == null)
 			{
 				if (_towerSelector.IsOpen)
 					_towerSelector.Hide();
@@ -61,10 +62,10 @@ namespace Towers
 			}
 			else
 			{
-				// if(_upgradeSelector.IsOpen)
-				// 	_upgradeSelector.Hide();
-				// else
-				// 	_upgradeSelector.Show();
+				if (_upgradeSelector.IsOpen)
+					_upgradeSelector.Hide();
+				else
+					_upgradeSelector.Show();
 			}
 		}
 
@@ -75,16 +76,31 @@ namespace Towers
 			_highlightSprite.color = color;
 		}
 
-		public void SetTower(GameObject towerPrefab)
+		public void BuyTower([NotNull] GameObject towerPrefab)
 		{
-			if(_tower != null) Debug.LogError("Tower already exists!");
-			_tower = Instantiate(towerPrefab, transform);
+			if (_containedTower != null) Destroy(_containedTower); //destroy potential old tower...
+			_containedTower = Instantiate(towerPrefab, transform); //...to replace it with the new one
+
+			if (_containedTower == null) throw new NullReferenceException("Tower was null even after instantiating a new one!");
+
+			Tower tower = _containedTower.GetComponent<Tower>();
+			PlayerStatsManager.Instance.Buy(tower.price);
+			_upgradeSelector.SetNextUpgrade(tower.GetNextUpgrade());
+			_upgradeSelector.UpdateButtons();
 		}
 
-		private void ResetTower()
+		public void SellContainedTower()
 		{
-			Destroy(_tower);
-			_tower = null;
+			if (_containedTower == null) throw new Exception("Tried to sell a tower that doesn't exist!");
+			Tower tower = _containedTower.GetComponent<Tower>();
+			PlayerStatsManager.Instance.Sell(tower.price);
+			RemoveContainedTower();
+		}
+
+		private void RemoveContainedTower()
+		{
+			Destroy(_containedTower);
+			_containedTower = null;
 		}
 	}
 }

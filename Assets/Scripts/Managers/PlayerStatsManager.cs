@@ -10,6 +10,7 @@ namespace Managers
 
 		[SerializeField] private int startHealth = 20;
 		[SerializeField] private int startMoney = 200;
+		[Range(0.0f, 1.0f)] [SerializeField] private float sellMultiplier = 0.5f;
 
 		[SerializeField] private TextMeshProUGUI statsText;
 
@@ -54,6 +55,12 @@ namespace Managers
 			}
 		}
 
+		public void Sell(int price)
+		{
+			if (price <= 0) throw new ArgumentOutOfRangeException(nameof(price));
+			AddMoney((int) (price * sellMultiplier));
+		}
+
 		public void AddMoney(int amount)
 		{
 			if (amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount));
@@ -70,7 +77,7 @@ namespace Managers
 
 		public bool HaveEnoughMoneyFor(int price)
 		{
-			if (price <= 0) throw new ArgumentOutOfRangeException(nameof(price));
+			if (price < 0) throw new ArgumentOutOfRangeException(nameof(price)); // Allow 0 for selling
 			return _currentMoney >= price;
 		}
 	}

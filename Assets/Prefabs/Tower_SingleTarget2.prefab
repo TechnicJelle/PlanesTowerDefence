@@ -61,11 +61,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
+      propertyPath: price
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 7443970420111211388, guid: 95eda975000dc2111a1f102e4e97e9b4, type: 3}
     - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
       propertyPath: upgradeTower
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
+      propertyPath: upgradeTowerPrefab
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []

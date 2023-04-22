@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: upgradeTower
       value: 
       objectReference: {fileID: 2265379858853030495, guid: b3081b8c5d91aa99f9cdbc0e255c3c0a, type: 3}
+    - target: {fileID: 6043823260481442727, guid: ee1e4d56177d3383a95f563da282eb1d, type: 3}
+      propertyPath: upgradeTowerPrefab
+      value: 
+      objectReference: {fileID: 2265379858853030495, guid: b3081b8c5d91aa99f9cdbc0e255c3c0a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
