@@ -1,4 +1,5 @@
 using System;
+using Entities;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -8,6 +9,15 @@ namespace ScriptableObjects
 	{
 		[Tooltip("Time for building phase")] [SerializeField] public int delaySincePreviousWave;
 		[SerializeField] private WavePart[] waveParts;
+
+		private void OnValidate()
+		{
+			foreach (WavePart wavePart in waveParts)
+			{
+				if (wavePart.enemyPrefab == null) Debug.LogError("Enemy prefab is null!");
+				if (wavePart.enemyPrefab.GetComponent<Enemy>() == null) Debug.LogError($"Enemy prefab \"{wavePart.enemyPrefab.name}\" does not have an Enemy component!");
+			}
+		}
 
 		public void StartWave()
 		{
