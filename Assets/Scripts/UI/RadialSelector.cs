@@ -107,6 +107,7 @@ namespace UI
 
 		private void Update()
 		{
+			// Update buttons interactability
 			for (int i = 0; i < _choices.Length; i++)
 				_buttons[i].interactable = PlayerStatsManager.Instance.HaveEnoughMoneyFor(_choices[i].Price);
 		}

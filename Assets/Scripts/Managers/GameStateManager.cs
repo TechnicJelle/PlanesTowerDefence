@@ -54,7 +54,7 @@ namespace Managers
 
 		public void StartGame()
 		{
-			if (_state != GameState.Pregame) return;
+			if (_state != GameState.Pregame) return; //can only start game from pregame state
 			Debug.Log("Starting game!");
 			_state = GameState.Running;
 			OnGameStart?.Invoke();
@@ -62,7 +62,7 @@ namespace Managers
 
 		public void GameOver()
 		{
-			if (_state != GameState.Running) return;
+			if (_state != GameState.Running) return; //can only end game from running state
 			Debug.Log("Game Over!");
 			endGameText.text = string.Format(_endGameText, gameOverText);
 			GameEnd();
@@ -70,7 +70,7 @@ namespace Managers
 
 		public void GameWin()
 		{
-			if (_state != GameState.Running) return;
+			if (_state != GameState.Running) return; //can only end game from running state
 			Debug.Log("Game Win!");
 			endGameText.text = string.Format(_endGameText, gameWinText);
 			GameEnd();
@@ -86,7 +86,7 @@ namespace Managers
 
 		public void RestartGame()
 		{
-			if (_state != GameState.End) return;
+			if (_state != GameState.End) return; //can only restart game from end state
 			Debug.Log("Restarting game!");
 			_state = GameState.Pregame;
 			OnResetGame?.Invoke();
