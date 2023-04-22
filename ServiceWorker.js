@@ -1,9 +1,9 @@
 const cacheName = "DefaultCompany-PlanesTowerDefence-1.0";
 const contentToCache = [
-    "Build/web.loader.js",
-    "Build/web.framework.js.br",
-    "Build/web.data.br",
-    "Build/web.wasm.br",
+    "Build/Build.loader.js",
+    "Build/Build.framework.js.gz",
+    "Build/Build.data.gz",
+    "Build/Build.wasm.gz",
     "TemplateData/style.css"
 
 ];
