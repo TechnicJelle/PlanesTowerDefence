@@ -14,6 +14,12 @@ jobs:
           cd /opt/plantuml
           UML=https://github.com/plantuml/plantuml/releases/download/v1.2023.6/plantuml.jar
           sudo curl -JLO ${UML}
+      - name: Install JetBrains Mono font
+        run: |
+          wget https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip
+          unzip JetBrainsMono-2.304.zip
+          mv JetBrainsMono-*.ttf ~/.local/share/fonts/
+          fc-cache -f -v
       - name: Checkout Repository
         uses: actions/checkout@v3.5.2
       - name: Process Diagrams
