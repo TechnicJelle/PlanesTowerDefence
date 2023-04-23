@@ -11,7 +11,7 @@ namespace UI
 		protected Button ThisButton;
 		private View _parentView;
 
-		protected void Awake()
+		private void Awake()
 		{
 			if (gotoView == null)
 				Debug.LogError("Enable View is null");

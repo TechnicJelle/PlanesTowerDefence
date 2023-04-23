@@ -7,7 +7,7 @@ namespace Route
 	{
 		public List<Node> nextNodes = new();
 		private Color _ownColour;
-		public int amountOfTimesVisited;
+		[HideInInspector] public int amountOfTimesVisited;
 
 		private void Awake()
 		{

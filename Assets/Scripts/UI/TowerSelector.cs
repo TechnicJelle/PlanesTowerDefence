@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace UI
 {
-	[RequireComponent(typeof(TowerContainer))]
 	public class TowerSelector : RadialSelector
 	{
 		[SerializeField] private TowerChoice[] towerChoices;

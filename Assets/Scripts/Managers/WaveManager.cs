@@ -21,8 +21,8 @@ namespace Managers
 
 		[SerializeField] private Wave[] waves;
 
-		[SerializeField] private TextMeshProUGUI waveText;
-		[SerializeField] private TextMeshProUGUI waveCountdownText;
+		[SerializeField] private TMP_Text waveText;
+		[SerializeField] private TMP_Text waveCountdownText;
 
 		private void Awake()
 		{

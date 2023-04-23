@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
+	[RequireComponent(typeof(TowerContainer))]
 	public class RadialSelector : MonoBehaviour
 	{
 		private static GameObject _canvasPrefab;

@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace UI
 {
-	[RequireComponent(typeof(TowerContainer))]
 	public class UpgradeSelector : RadialSelector
 	{
 		[SerializeField] private SellChoice sellChoice;
@@ -38,19 +37,7 @@ namespace UI
 
 		public void SetNextUpgrade([CanBeNull] GameObject nextTowerPrefab)
 		{
-			if (nextTowerPrefab == null)
-			{
-				upgradeChoice.SetMax();
-				upgradeChoice.NextTowerPrefab = null;
-				upgradeChoice.price = 0;
-			}
-			else
-			{
-				upgradeChoice.SetUpgrade();
-				upgradeChoice.NextTowerPrefab = nextTowerPrefab;
-				upgradeChoice.price = nextTowerPrefab.GetComponent<Tower>().price;
-				upgradeChoice.sprite = nextTowerPrefab.GetComponent<SpriteRenderer>().sprite;
-			}
+			upgradeChoice.SetUpgrade(nextTowerPrefab);
 		}
 	}
 
@@ -61,24 +48,32 @@ namespace UI
 		[SerializeField] private string buttonLabelMax = "Max";
 		[SerializeField] private Sprite maxSprite;
 
+		[NonSerialized] [CanBeNull] public GameObject NextTowerPrefab;
 
 		[NonSerialized] private string _buttonLabel;
-		[NonSerialized] [CanBeNull] public GameObject NextTowerPrefab;
-		[NonSerialized] public int price;
-		[NonSerialized] public Sprite sprite;
+		[NonSerialized] private int _price;
+		[NonSerialized] private Sprite _sprite;
 
 		public string Label => _buttonLabel;
-		public int Price => price;
-		public Sprite Sprite => sprite;
+		public int Price => _price;
+		public Sprite Sprite => _sprite;
 
-		public UpgradeChoice() => SetUpgrade();
-
-		public void SetUpgrade() => _buttonLabel = buttonLabelUpgrade;
-
-		public void SetMax()
+		public void SetUpgrade([CanBeNull] GameObject nextTowerPrefab)
 		{
-			_buttonLabel = buttonLabelMax;
-			sprite = maxSprite;
+			if (nextTowerPrefab == null)
+			{
+				_buttonLabel = buttonLabelMax;
+				NextTowerPrefab = null;
+				_price = 0;
+				_sprite = maxSprite;
+			}
+			else
+			{
+				_buttonLabel = buttonLabelUpgrade;
+				NextTowerPrefab = nextTowerPrefab;
+				_price = nextTowerPrefab.GetComponent<Tower>().price;
+				_sprite = nextTowerPrefab.GetComponent<SpriteRenderer>().sprite;
+			}
 		}
 	}
 
