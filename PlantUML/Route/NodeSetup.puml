@@ -1,7 +1,4 @@
 @startuml
-class NodeSetup {
-    - {static} IsAboutEqual(a:float, b:float) : bool
-    - Awake() : void
+class "NodeSetup : MonoBehaviour" as NodeSetup {
 }
-MonoBehaviour <|-- NodeSetup
 @enduml

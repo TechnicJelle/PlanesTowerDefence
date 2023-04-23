@@ -1,18 +1,6 @@
 @startuml
-class TowerContainer {
-    - Awake() : void
-    - Start() : void
-    - OnMouseEnter() : void
-    - OnMouseOver() : void
-    - OnMouseUp() : void
-    - OnMouseExit() : void
-    + BuyTower(towerPrefab:GameObject) : void
+class "TowerContainer : MonoBehaviour" as TowerContainer {
+    + BuyTower(towerPrefab:GameObject?) : void
     + SellContainedTower() : void
-    - RemoveContainedTower() : void
 }
-MonoBehaviour <|-- TowerContainer
-TowerContainer --> "_highlightSprite" SpriteRenderer
-TowerContainer --> "_towerSelector" TowerSelector
-TowerContainer --> "_upgradeSelector" UpgradeSelector
-TowerContainer --> "_containedTower" GameObject
 @enduml

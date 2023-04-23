@@ -1,8 +1,0 @@
-@startuml
-class ViewIsolator {
-    # <<override>> Enabled : bool <<get>>
-}
-class "Isolator`1"<T> {
-}
-"Isolator`1" "<View>" <|-- ViewIsolator
-@enduml

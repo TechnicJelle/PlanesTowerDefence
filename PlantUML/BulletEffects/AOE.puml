@@ -1,5 +1,5 @@
 @startuml
-class AOE {
+class AOE <<Bullet>> {
     - range : float = 2
     # <<override>> OnEnemyHit(enemy:Enemy) : void
 }

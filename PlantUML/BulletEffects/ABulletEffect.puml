@@ -1,8 +1,7 @@
 @startuml
-abstract class ABulletEffect {
-    - Awake() : void
+abstract class "ABulletEffect : MonoBehaviour" as ABulletEffect <<Bullet>> {
+    # Bullet : Bullet <<get>>
     # {abstract} OnEnemyHit(enemy:Enemy) : void
 }
-MonoBehaviour <|-- ABulletEffect
 ABulletEffect --> "Bullet" Bullet
 @enduml

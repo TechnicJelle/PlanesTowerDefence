@@ -1,13 +1,7 @@
 @startuml
-class Bullet {
+class "Bullet : MonoBehaviour" as Bullet {
     + damage : int = 10
     - speed : float = 10f
-    - _hasAlreadyHitEnemy : bool
-    - Update() : void
-    - OnTriggerEnter2D(col:Collider2D) : void
+    + OnEnemyHit : Action<Enemy>
 }
-class "Action`1"<T> {
-}
-MonoBehaviour <|-- Bullet
-Bullet --> "OnEnemyHit<Enemy>" "Action`1"
 @enduml

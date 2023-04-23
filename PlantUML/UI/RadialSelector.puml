@@ -1,22 +1,18 @@
 @startuml
-class RadialSelector {
-    - Awake() : void
+class "RadialSelector : MonoBehaviour" as RadialSelector <<TowerContainer>> {
+    # TowerContainer : TowerContainer <<get>>
     # Init(choices:IChoice[]) : void
     + UpdateButtons() : void
     # <<virtual>> OnChoiceClicked(choice:IChoice) : void
     + Show() : void
-    - Update() : void
     + Hide() : void
     + IsOpen : bool <<get>>
 }
 interface IChoice {
     + Label : string <<get>>
     + Price : int <<get>>
+    + Sprite : Sprite <<get>>
 }
-MonoBehaviour <|-- RadialSelector
-RadialSelector --> "_canvasPrefab" GameObject
-RadialSelector --> "_buttonPrefab" GameObject
-RadialSelector --> "_canvas" Canvas
 RadialSelector --> "TowerContainer" TowerContainer
-IChoice --> "Sprite" Sprite
+RadialSelector ..> "IChoice" IChoice
 @enduml

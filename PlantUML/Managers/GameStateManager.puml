@@ -4,27 +4,27 @@ enum GameState {
     Running,
     End,
 }
-class GameStateManager {
+class "GameStateManager : MonoBehaviour" as GameStateManager {
+    + {static} Instance : GameStateManager
+    + OnGameStart : Action
+    + OnGameEnd : Action
+    + OnResetGame : Action
+    - inGameView : View
+    - gameEndView : View
+    - endGameText : TMP_Text
     - gameOverText : string = "Game Over!"
     - gameWinText : string = "You Win!"
-    - _endGameText : string
-    - Awake() : void
+    - _state : GameState
     + IsPregame : bool <<get>>
     + IsRunning : bool <<get>>
     + IsEnded : bool <<get>>
     + StartGame() : void
     + GameOver() : void
     + GameWin() : void
-    - GameEnd() : void
     + RestartGame() : void
 }
-MonoBehaviour <|-- GameStateManager
 GameStateManager --> "Instance" GameStateManager
-GameStateManager --> "OnGameStart" Action
-GameStateManager --> "OnGameEnd" Action
-GameStateManager --> "OnResetGame" Action
 GameStateManager --> "inGameView" View
 GameStateManager --> "gameEndView" View
-GameStateManager --> "endGameText" TMP_Text
-GameStateManager --> "_state" GameState
+GameStateManager -> "_state" GameState
 @enduml

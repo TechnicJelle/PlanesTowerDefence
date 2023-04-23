@@ -1,9 +1,9 @@
 @startuml
-class Debuff {
+class Debuff <<Bullet>> {
     - speedFactor : float = 0.5f
     - duration : float = 2f
+    - visualEffectPrefab : GameObject
     # <<override>> OnEnemyHit(enemy:Enemy) : void
 }
 ABulletEffect <|-- Debuff
-Debuff --> "visualEffectPrefab" GameObject
 @enduml

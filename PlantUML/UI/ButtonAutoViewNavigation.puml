@@ -1,7 +1,5 @@
 @startuml
-class ButtonAutoViewNavigation {
-    - OnEnable() : void
-    - OnDisable() : void
+class ButtonAutoViewNavigation <<Button>> {
 }
 ButtonViewNavigation <|-- ButtonAutoViewNavigation
 @enduml

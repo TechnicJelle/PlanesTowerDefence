@@ -1,6 +1,0 @@
-@startuml
-class ColourChanger {
-}
-MonoBehaviour <|-- ColourChanger
-ColourChanger o-> "color" Color
-@enduml

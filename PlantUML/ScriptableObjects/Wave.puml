@@ -1,12 +1,12 @@
 @startuml
-class Wave {
+class "Wave : ScriptableObject" as Wave {
     + delaySincePreviousWave : int
-    - OnValidate() : void
+    - waveParts : WavePart[]
     + StartWave() : void
 }
 class WavePart {
+    + enemyPrefab : GameObject
     + enemyCount : int
 }
-ScriptableObject <|-- Wave
-WavePart --> "enemyPrefab" GameObject
+Wave --> "waveParts" WavePart
 @enduml
